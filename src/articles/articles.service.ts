@@ -18,10 +18,12 @@ export class ArticlesService {
   async findOne(id: number) {
     // const article = this.prisma.article.findUnique({ where: { id } });
     // console.log(article);
-    const article = await this.prisma.article.findUnique({ where: { id } });
-    if (!article) {
-      throw new NotFoundException(`Article with id ${id} does not exist`);
-    }
+    const article = await this.prisma.article.findUniqueOrThrow({
+      where: { id },
+    });
+    // if (!article) {
+    //   throw new NotFoundException(`Article with id ${id} does not exist`);
+    // }
 
     return article;
   }
