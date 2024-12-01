@@ -1,9 +1,11 @@
 import { PrismaClient } from '@prisma/client';
 
 // initialize Prisma Client
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
-async function main() {
+export async function articleSeed(prisma: PrismaClient) {
+  const user1 = await prisma.user.findFirst();
+
   // Create two dummy articles
   const post1 = await prisma.article.upsert({
     where: { title: 'Prisma Adds Support for MongoDB' },
@@ -14,6 +16,7 @@ async function main() {
       description:
         "We are excited to share that today's Prisma ORM release adds stable support for MongoDB!",
       published: false,
+      authorId: user1?.id ?? 1,
     },
   });
 
@@ -26,19 +29,9 @@ async function main() {
       description:
         'Learn about everything in the Prisma ecosystem and community from January to March 2022.',
       published: true,
+      authorId: user1?.id ?? 1,
     },
   });
 
   console.log({ post1, post2 });
 }
-
-// Execute the main function
-main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    // Close Prisma Client at the end
-    await prisma.$disconnect();
-  });
