@@ -15,8 +15,8 @@ datasource db {
 
 model Article {
   id          Int      @id @default(autoincrement())
-  author      User     @relation(fields: [authorId], references: [id])
-  authorId    Int
+  author      User?     @relation(fields: [authorId], references: [id])
+  authorId    Int?
   title       String   @unique
   description String?
   body        String
