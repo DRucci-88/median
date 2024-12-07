@@ -49,5 +49,5 @@ export async function articleSeed(prisma: PrismaClient) {
     },
   });
 
-  console.log({ post1, post2 });
+  console.log({ post1, post2, post3 });
 }

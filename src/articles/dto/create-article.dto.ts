@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Prisma } from '@prisma/client';
 import {
   IsNotEmpty,
   IsOptional,
@@ -8,6 +9,11 @@ import {
 } from 'class-validator';
 
 export class CreateArticleDto {
+  //implements Prisma.ArticleCreateInput {
+  // createdAt?: string | Date | undefined;
+  // updatedAt?: string | Date | undefined;
+  // author: Prisma.UserCreateNestedOneWithoutArticlesInput;
+
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
