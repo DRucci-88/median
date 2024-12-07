@@ -12,14 +12,18 @@ export class ArticlesService {
   }
 
   findAll() {
-    return this.prisma.article.findMany({ where: { published: true } });
+    return this.prisma.article.findMany({
+      where: { published: true },
+      include: { author: true },
+    });
   }
 
   async findOne(id: number) {
     // const article = this.prisma.article.findUnique({ where: { id } });
     // console.log(article);
-    const article = await this.prisma.article.findUniqueOrThrow({
+    const article = await this.prisma.article.findUnique({
       where: { id },
+      include: { author: true },
     });
     // if (!article) {
     //   throw new NotFoundException(`Article with id ${id} does not exist`);
